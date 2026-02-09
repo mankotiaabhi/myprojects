@@ -1,3 +1,8 @@
+"""
+Program: Calculate total runs scored by each team
+and plot the result as a bar chart.
+"""
+
 import csv
 import matplotlib.pyplot as plt
 import os
@@ -5,6 +10,15 @@ import os
 
 
 def total_runs_of_team(file_path):
+    '''
+    Reads the CSV file and calculates the total runs scored by each team.
+
+    Args:
+       file_path (str): Path to the deliveries.csv file.
+    
+    Returns:
+       dict: Dictionary with team names as key and total runs as values.
+    '''
     result = {}
 
     with open(file_path,'r',encoding='utf-8') as file:
@@ -20,11 +34,13 @@ def total_runs_of_team(file_path):
         return result
 
 def plot(file_path):
+    '''
+    Plots total runs scored by each team.
+    '''
     runs_data = total_runs_of_team(file_path)
-    # print(runs_data)
     teams = list(runs_data.keys())
     runs = list(runs_data.values())
-
+    # Create output folder if it does not exist
     os.makedirs("output", exist_ok=True)
     plt.figure(figsize=(12,8))
     plt.bar(teams, runs)
@@ -40,12 +56,14 @@ def plot(file_path):
     plt.show()
 
 def execute() :
+    '''
+    Main execution function.
+    '''
     file_path = "./data/deliveries.csv"
     plot(file_path)
 
 
 
-# if __name__ == "__main__":
-#     execute()
+if __name__ == "__main__":
+    execute()
 
-print(__name__)
